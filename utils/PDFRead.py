@@ -16,6 +16,6 @@ class PDFReader:
                 page = pdf_file.pages[page_num]
                 doc += page.extract_text()
             
-            text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n" , '\n'], chunk_size=2500, chunk_overlap=500)
+            text_splitter = RecursiveCharacterTextSplitter(separators=["\n\n" , '\n'], chunk_size=2000, chunk_overlap=500)
             doc_content = text_splitter.create_documents([doc])
             return doc_content

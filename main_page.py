@@ -1,6 +1,5 @@
 import streamlit as st
 import utils.TextRead as TextRead
-import utils.URLRead as URLRead
 import utils.PDFRead as PDFRead
 import globalvar
 from streamlit_extras.no_default_selectbox import selectbox
@@ -29,10 +28,6 @@ with st.container():
     if option == "Enter text":
         text = TextRead.TextReader()
         input_text = text.get_text()
-
-    elif option == "Upload link":
-        url = URLRead.URLReader()
-        input_text = url
 
     elif option == "Upload pdf":
         pdf = PDFRead.PDFReader()

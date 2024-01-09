@@ -14,17 +14,15 @@ no_sidebar_style = """
     </style>
 """
 st.markdown(no_sidebar_style, unsafe_allow_html=True)
+os.environ['OPENAI_API_KEY'] = credentials.openai_api_key
 
 # st.write(globalvar.inputText)
 
-os.environ['OPENAI_API_KEY'] = credentials.openai_api_key
-
 map_prompt = """
-Write a concise summary of the following in at least 250 words and at most 280 words,Strictly use words only from the given context to create the summary:
+Write a concise summary of the following,Strictly use words only from the given context to create the summary:
 "{text}" 
 CONCISE SUMMARY:
 """
-
 map_prompt_template = PromptTemplate(template=map_prompt, input_variables=["text"])
 
 
@@ -34,13 +32,11 @@ Return your response in at least 500 words and at most 550 words which covers th
 ```{text}```
 SUMMARY:
 """
-
 combine_prompt_template = PromptTemplate(template=combine_prompt, input_variables=["text"])
 
-llm = OpenAI(temperature=0.15)
+llm = OpenAI(temperature = 0)
 
 chain = load_summarize_chain(llm, chain_type="map_reduce",map_prompt=map_prompt_template,combine_prompt=combine_prompt_template)
-print(globalvar.inputText)
 summary = chain.run(globalvar.inputText)
 
 st.write('Summary:')
